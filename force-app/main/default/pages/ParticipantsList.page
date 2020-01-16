@@ -50,7 +50,7 @@
                     <apex:param value="{!training.End_Date__c}" />
                 </apex:outputText>
                 <span>Place: {!training.Location__r.Billing_City__c}</span>
-                <span>Count of participants: {!training.participants}</span>
+                <span>Count of participants: {!training.participants__с}</span>
             </div>
             <div class="row">
                 <div>No.</div>
