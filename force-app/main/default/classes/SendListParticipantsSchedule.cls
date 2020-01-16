@@ -4,6 +4,8 @@ public class SendListParticipantsSchedule implements Schedulable {
         List<Training__c> trainings = [SELECT id, Start_Date__c, End_Date__c, Trainer__c 
                                       FROM Training__c
                                       WHERE DAY_ONLY(Start_Date__c) = :d];
-        MailHelper.sendParticipantsList(trainings);
+        if(!trainings.isEmpty()) {
+            MailHelper.sendParticipantsList(trainings);
+        }
     }
 }

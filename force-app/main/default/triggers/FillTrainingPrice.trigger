@@ -18,6 +18,6 @@ trigger FillTrainingPrice on Training__c (before insert, before update) {
         PriceBookEntry pbs = currentPBSmap.get(training.Product__c);
         if(pbs.UnitPrice != null) { // if product not set for training
         	training.List_Price__c = pbs.UnitPrice;   
-        } // test for deleyte
+        }
     }
 }

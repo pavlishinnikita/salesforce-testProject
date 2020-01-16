@@ -17,12 +17,15 @@ public class MailHelper {
     }
     
     public static void sendParticipantsList(List<Training__c> trainings) {
+        EmailTemplate et = [SELECT id FROM EmailTemplate WHERE developerName = 'Participant_List' LIMIT 1];
         List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
         for(Training__c t : trainings) {
         	Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
         	mail.saveAsActivity = true;
+           	mail.setTemplateId(et.id);
         	mail.setTargetObjectId(t.Trainer__c);
-            mail.setWhatId(t.Trainer__c);
+           	//mail.setWhatId(t.Trainer__c);
+            mail.setSenderDisplayName('Training event');
             PageReference pr = Page.ParticipantsList;
             pr.getParameters().put('trainingId', t.id);
             try {

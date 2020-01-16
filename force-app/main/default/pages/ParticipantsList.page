@@ -1,64 +1,72 @@
-<apex:page controller="ParticipantController" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+<apex:page controller="ParticipantController" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false"
+    applyBodyTag="false" applyHtmlTag="false">
     <apex:variable value="{!1}" var="index" />
-    <apex:variable value="{!training}" var="training"/>
+    <apex:variable value="{!training}" var="training" />
+
     <head>
-    	<style type="text/css">
+        <style type="text/css">
             @page {
-            	size: a4;
+                size: a4;
             }
+
             span {
-            	display: block;
-            	font-weight: 5em;
-            	margin: 5px, auto;
+                display: block;
+                font-weight: 5em;
+                margin: 5px, auto;
             }
+
             .content-header {
-            	margin-bottom: 10px;
-            	text-align: center;
-            	font-weight: bold;
-            	border-bottom: 5px solid black;
+                margin-bottom: 10px;
+                text-align: center;
+                font-weight: bold;
+                border-bottom: 5px solid black;
             }
+
             .row {
-            	margin: 0;
-            	padding: 0;
+                margin: 0;
+                padding: 0;
             }
-            .row > div {
-            	padding: 0;
-            	margin: 0;
-            	width: 24%;
-            	display: inline-block;
+
+            .row>div {
+                padding: 0;
+                margin: 0;
+                width: 24%;
+                display: inline-block;
             }
         </style>
     </head>
+
     <body>
-            <apex:pageBlock >
-                <div class="content-header">
-                    <span>Training: {!training.Training_Course__r.Name}</span>
-                    <span>Trainer: {!training.Trainer__r.FirstName + ' ' + training.Trainer__r.LastName} </span>
-                        Date:
-                        <apex:outputText value="{0, date, MM'.'dd'.'yyyy}">
-                        	<apex:param value="{!training.Start_Date__c}"/>
-                        </apex:outputText>
-                        -
-                        <apex:outputText value="{0, date, MM'.'dd'.'yyyy}">
-                        	<apex:param value="{!training.End_Date__c}"/>
-                        </apex:outputText>
-                    <span>Place: {!training.Location__r.Billing_City__c}</span>
-                </div>
-				<div class="row" >
-                    <div>No.</div>
-                    <div>Name</div>
-                    <div>Surname</div>
-                </div>
-            	<hr />
-            </apex:pageBlock>       
-    	<apex:repeat value="{!participants}" var="p">
+        <apex:pageBlock>
+            <div class="content-header">
+                <span>Training: {!training.Training_Course__r.Name}</span>
+                <span>Trainer: {!training.Trainer__r.FirstName + ' ' + training.Trainer__r.LastName} </span>
+                Date:
+                <apex:outputText value="{0, date, MM'.'dd'.'yyyy}">
+                    <apex:param value="{!training.Start_Date__c}" />
+                </apex:outputText>
+                -
+                <apex:outputText value="{0, date, MM'.'dd'.'yyyy}">
+                    <apex:param value="{!training.End_Date__c}" />
+                </apex:outputText>
+                <span>Place: {!training.Location__r.Billing_City__c}</span>
+                <span>Count of participants: {!training.participants}</span>
+            </div>
             <div class="row">
-               	<div>{!index}</div>
+                <div>No.</div>
+                <div>Name</div>
+                <div>Surname</div>
+            </div>
+            <hr />
+        </apex:pageBlock>
+        <apex:repeat value="{!participants}" var="p">
+            <div class="row">
+                <div>{!index}</div>
                 <div>{!p.Contact_Name__r.FirstName}</div>
                 <div>{!p.Contact_Name__r.LastName}</div>
             </div>
             <hr />
-        	<apex:variable var="index" value="{!index + 1}"/>    
-        </apex:repeat> 
+            <apex:variable var="index" value="{!index + 1}" />
+        </apex:repeat>
     </body>
 </apex:page>

@@ -39,7 +39,7 @@ public class CertificateController {
             cv.FirstPublishLocationId = p.Contact_Name__c;
             cvs.add(cv);
         }
-        //upsert cvs;
+        upsert cvs;
         return 'Success';
     }
 
