@@ -1,7 +1,6 @@
 public class ParticipantController {
     public List < Participant__c > getParticipants() {
         String trainingId = ApexPages.currentPage().getParameters().get('trainingId');
-        System.debug(trainingId);
         List < Participant__c > participants;
 
         participants = [
@@ -17,5 +16,20 @@ public class ParticipantController {
         ];
         System.debug(participants);
         return participants;
+    }
+    
+    public Training__c getTraining() {
+        String trainingId = ApexPages.currentPage().getParameters().get('trainingId');
+        return [
+            SELECT Start_Date__c, End_Date__c,
+            Training_Course__r.Name,
+            Training_Course__r.Description__c,
+            Location__r.Billing_City__c,
+            CreatedById,
+            Trainer__r.FirstName,
+            Trainer__r.LastName
+            FROM Training__c WHERE id =: trainingId
+            LIMIT 1
+        ];
     }
 }

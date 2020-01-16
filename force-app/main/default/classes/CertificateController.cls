@@ -42,7 +42,7 @@ public class CertificateController {
         //upsert cvs;
         return 'Success';
     }
-    
+
     public List<Participant__c> getParticipants() {       
 		String participantId = ApexPages.currentPage().getParameters().get('participantId');
         String trainingId = ApexPages.currentPage().getParameters().get('trainingId');
