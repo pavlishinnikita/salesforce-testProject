@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Begin_Date_Rule</fullName>
+    <active>true</active>
+    <description>Begin date cannot be greater than end date</description>
+    <errorConditionFormula>Start_Date__c  &gt; End_Date__c</errorConditionFormula>
+    <errorDisplayField>Start_Date__c</errorDisplayField>
+    <errorMessage>Begin date cannot be greater than end date</errorMessage>
+</ValidationRule>

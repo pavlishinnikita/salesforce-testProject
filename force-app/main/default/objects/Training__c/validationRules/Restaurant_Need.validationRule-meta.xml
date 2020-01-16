@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Restaurant_Need</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF( AND(ROUND(MOD(( End_Date__c  - Start_Date__c)*24,24),0) &gt; 4, ISBLANK( Restaurant__c )) , true, false )</errorConditionFormula>
+    <errorMessage>Сhoose a restaurant because the training is long</errorMessage>
+</ValidationRule>

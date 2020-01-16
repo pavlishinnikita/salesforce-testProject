@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Deny_add_participant</fullName>
+    <active>true</active>
+    <description>Deny add participant if training status &#39;canceld&#39; and accept if &#39;active&#39;</description>
+    <errorConditionFormula>IF(ISPICKVAL(Training__r.Status__c, &quot;cancelled&quot;), true, 
+IF(ISPICKVAL(Training__r.Status__c, &quot;active&quot;), false, true)
+)</errorConditionFormula>
+    <errorMessage>Can&#39;t add participants to canceled or draft training</errorMessage>
+</ValidationRule>

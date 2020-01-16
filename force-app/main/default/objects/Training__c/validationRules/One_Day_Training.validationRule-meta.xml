@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>One_Day_Training</fullName>
+    <active>true</active>
+    <errorConditionFormula>if( DATEVALUE( End_Date__c ) - DATEVALUE( Start_Date__c ) &gt; 1, true, false )</errorConditionFormula>
+    <errorMessage>Training must have one-day duration</errorMessage>
+</ValidationRule>

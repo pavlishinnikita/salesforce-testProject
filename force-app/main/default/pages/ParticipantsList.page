@@ -1,0 +1,65 @@
+<apex:page controller="ParticipantController" renderAs="pdf" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" applyHtmlTag="false">
+    <apex:variable value="{!0}" var="index" />
+    <head>
+    	<style type="text/css">
+            @page {
+            	size: a4;
+            }
+            span {
+            	display: block;
+            	font-weight: 5em;
+            	margin: 5px, auto;
+            }
+            .content-header {
+            	margin-bottom: 10px;
+            	text-align: center;
+            	font-weight: bold;
+            	border-bottom: 5px solid black;
+            }
+            .row {
+            	margin: 0;
+            	padding: 0;
+            }
+            .row > div {
+            	padding: 0;
+            	margin: 0;
+            	width: 24%;
+            	display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+    	<apex:repeat value="{!participants}" var="p">
+            <apex:pageBlock rendered="{!index == 0}">
+                <div class="content-header">
+                    <span>Training: {!p.Training__r.Training_Course__r.Name}</span>
+                    <span>Trainer: {!p.Training__r.Trainer__r.FirstName + ' ' + p.Training__r.Trainer__r.LastName} </span>
+                        Date:
+                        <apex:outputText value="{0, date, MM'.'dd'.'yyyy}">
+                        	<apex:param value="{!p.Training__r.Start_Date__c}"/>
+                        </apex:outputText>
+                        -
+                        <apex:outputText value="{0, date, MM'.'dd'.'yyyy}">
+                        	<apex:param value="{!p.Training__r.End_Date__c}"/>
+                        </apex:outputText>
+                    <span>Place: {!p.Training__r.Location__r.Billing_City__c}</span>
+                </div>
+            </apex:pageBlock>
+            <apex:pageBlock rendered="{!index == 0}">
+				<div class="row" >
+                    <div>No.</div>
+                    <div>Name</div>
+                    <div>Surname</div>
+                </div>
+            	<hr />
+            </apex:pageBlock>
+            <div class="row">
+               	<div>{!index}</div>
+                <div>{!p.Contact_Name__r.FirstName}</div>
+                <div>{!p.Contact_Name__r.LastName}</div>
+            </div>
+            <hr />
+        	<apex:variable var="index" value="{!index + 1}"/>    
+        </apex:repeat> 
+    </body>
+</apex:page>
