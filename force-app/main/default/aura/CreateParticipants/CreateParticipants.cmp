@@ -1,0 +1,4 @@
+<aura:component implements="force:lightningQuickAction" >
+	<lightning:buttonIcon variant="bare" iconName="utility:settings"  alternativeText="Settings" />
+    <lightning:buttonIcon variant="bare" iconName="utility:new"  alternativeText="Settings" />
+</aura:component>

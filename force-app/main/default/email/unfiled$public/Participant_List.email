@@ -1,0 +1,5 @@
+<messaging:emailTemplate subject="Welcome to training" recipientType="Contact" relatedToType="Training__c">
+<messaging:plainTextEmailBody >
+Good day! Information about training event available in attachment.
+</messaging:plainTextEmailBody>
+</messaging:emailTemplate>

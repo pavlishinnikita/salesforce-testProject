@@ -1,0 +1,31 @@
+<aura:component controller="CertificateController" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+    <aura:attribute name="generated" type="Boolean" default="true" />
+    <aura:html tag="style">
+        .cuf-content {
+            padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+            padding: 0rem !important;
+        }       
+        .slds-modal__content{
+            overflow-y:hidden !important;
+            height:unset !important;
+            max-height:unset !important;
+        }
+    </aura:html>
+    <div class="slds-modal__content slds-p-around--x-large slds-align_absolute-center slds-size_1-of-1 slds-is-relative" aura:id="modalbody" id="modalbody">
+            <aura:if isTrue="{! v.generated }">
+                <iframe src="{!'https://pavlishin-nikita-test-p-dev-ed--c.visualforce.com/apex/Certificate?core.apexpages.request.devconsole=1&amp;trainingId=' + v.recordId}" width="100%" height="500px;" frameBorder="0"/>
+                <aura:set attribute="else">
+                    <lightning:spinner alternativeText="Loading" />
+                </aura:set>
+            </aura:if>
+    </div>
+    <!-- MODAL FOOTER -->
+	<div class="modal-footer slds-modal__footer slds-size_1-of-1">
+		<div class="forceChangeRecordTypeFooter">
+			<lightning:button class="slds-button slds-button_neutral" label="Cancel" onclick="{!c.close}" />
+            <lightning:button class="slds-button slds-button--brand" variant="Brand" label="Save certificates" onclick="{!c.generateCertificates}" />
+		</div>
+	</div>
+</aura:component>

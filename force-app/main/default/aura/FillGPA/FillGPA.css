@@ -1,0 +1,13 @@
+.THIS.cuf-content {
+	padding: 0 !important;
+}
+
+.THIS.slds-p-around--large {
+    padding: 0 !important;
+}      
+
+.THIS.slds-modal__content {
+	overflow-y:hidden !important;
+	height:unset !important;
+	max-height:unset !important;
+}
