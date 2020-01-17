@@ -5,7 +5,9 @@ public class SendListParticipantsSchedule implements Schedulable {
                                       FROM Training__c
                                       WHERE DAY_ONLY(Start_Date__c) = :d];
         if(!trainings.isEmpty()) {
-            MailHelper.sendParticipantsList(trainings);
+            SendListParticipantsBatch slpb = new SendListParticipantsBatch();
+            slpb.query = trainings;
+            Id listBatchId = Database.executeBatch(slpb);
         }
     }
 }

@@ -27,7 +27,8 @@ public class ParticipantController {
             Location__r.Billing_City__c,
             CreatedById,
             Trainer__r.FirstName,
-            Trainer__r.LastName
+            Trainer__r.LastName,
+            Participants__c
             FROM Training__c WHERE id =: trainingId
             LIMIT 1
         ];

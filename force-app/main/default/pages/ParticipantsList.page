@@ -37,7 +37,7 @@
     </head>
 
     <body>
-        <apex:pageBlock>
+        <apex:pageBlock >
             <div class="content-header">
                 <span>Training: {!training.Training_Course__r.Name}</span>
                 <span>Trainer: {!training.Trainer__r.FirstName + ' ' + training.Trainer__r.LastName} </span>
@@ -50,7 +50,7 @@
                     <apex:param value="{!training.End_Date__c}" />
                 </apex:outputText>
                 <span>Place: {!training.Location__r.Billing_City__c}</span>
-                <span>Count of participants: {!training.participants__с}</span>
+                <span>Count of participants: {!training.Participants__c}</span>
             </div>
             <div class="row">
                 <div>No.</div>

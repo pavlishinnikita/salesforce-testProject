@@ -6,11 +6,19 @@
 	</types>
 	<types>
 		<members>*</members>
+		<name>ApexComponent</name>
+	</types>
+	<types>
+		<members>*</members>
 		<name>ApexPage</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>ApexTrigger</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>AuraDefinitionBundle</name>
 	</types>
 	<types>
 		<members>Account</members>
@@ -105,6 +113,17 @@
 		<members>User</members>
 		<members>UserProvisioningRequest</members>
 		<name>CustomObject</name>
+	</types>
+	<types>
+		<members>unfiled$public/Invite_to_training</members>
+		<members>unfiled$public/Participant_List</members>
+		<name>EmailTemplate</name>
+	</types>
+	<types>
+		<members>Training__c.Fill_GRA</members>
+		<members>Training__c.Preview_Certificates</members>
+		<members>Training__c.Show_participants</members>
+		<name>QuickAction</name>
 	</types>
 	<version>47.0</version>
 </Package>
