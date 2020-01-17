@@ -18,5 +18,8 @@
 	},
 	close: function(component, event, helper) {
     	$A.get("e.force:closeQuickAction").fire();        
-	}
+  },
+  doInit: function(component, event, helper) {
+    component.set('v.url', helper.baseUrl());
+  }
 })
