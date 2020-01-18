@@ -1,0 +1,4 @@
+<aura:component>
+    <aura:attribute name="newParticipant" type="Participant__c" default="{'sobjectType' : 'Participant__c'}" />
+    <force:inputField aura:id="contactId" value="{!v.newParticipant.Contact_Name__c}" required="false" />
+</aura:component>

@@ -33,4 +33,35 @@ public class ParticipantController {
             LIMIT 1
         ];
     }
+
+    @AuraEnabled
+    public static Integer getMaxParticipants(String oppId) {
+        Opportunity o = [SELECT Training__r.Max_participants_quantity__c FROM Opportunity WHERE id = :oppId];
+        return Integer.valueOf(o.Training__r.Max_participants_quantity__c);
+    }
+
+    @AuraEnabled
+    public static void test(String oppId, List<String> contactsId) {
+        Opportunity opp = [SELECT id, Training__c FROM Opportunity WHERE id = :oppId LIMIT 1];
+        List<Participant__c> participants = new List<Participant__c>();
+        for(String id : contactsId) {
+            Participant__c p = new Participant__c();
+            p.Contact_Name__c = id;
+            p.Opportunity_Name__c = opp.id;
+            p.Training__c = opp.Training__c;
+            participants.add(p);
+        }
+        try {
+            insert participants;
+        } catch(DMLException e) {
+            System.debug(e);
+        }
+        
+    }
+
+    // @AuraEnabled
+    // public static void createParticipants(String trainingId, List<String> contactsId) {
+    //     System.debug(contactsId);
+    //     System.debug(trainingId);
+    // }
 }
