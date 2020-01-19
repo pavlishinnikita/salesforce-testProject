@@ -35,13 +35,16 @@ public class ParticipantController {
     }
 
     @AuraEnabled
-    public static Integer getMaxParticipants(String oppId) {
-        Opportunity o = [SELECT Training__r.Max_participants_quantity__c FROM Opportunity WHERE id = :oppId];
-        return Integer.valueOf(o.Training__r.Max_participants_quantity__c);
+    public static Integer[] getParticipantsCount(String oppId) {
+        Opportunity o = [SELECT Training__r.Max_participants_quantity__c, Training__r.Participants__c FROM Opportunity WHERE id = :oppId];
+        List<Integer> returnValue = new List<Integer>();
+        returnValue.add(Integer.valueOf(o.Training__r.Max_participants_quantity__c));
+        returnValue.add(Integer.valueOf(o.Training__r.Participants__c));
+        return returnValue;//Integer.valueOf(o.Training__r.Max_participants_quantity__c);
     }
 
     @AuraEnabled
-    public static void test(String oppId, List<String> contactsId) {
+    public static void test(String oppId, String[] contactsId) {
         Opportunity opp = [SELECT id, Training__c FROM Opportunity WHERE id = :oppId LIMIT 1];
         List<Participant__c> participants = new List<Participant__c>();
         for(String id : contactsId) {
@@ -56,12 +59,29 @@ public class ParticipantController {
         } catch(DMLException e) {
             System.debug(e);
         }
-        
     }
 
-    // @AuraEnabled
-    // public static void createParticipants(String trainingId, List<String> contactsId) {
-    //     System.debug(contactsId);
-    //     System.debug(trainingId);
-    // }
+    @AuraEnabled
+    public static void createParticipants(String oppId, String[] contactsId) {
+        System.debug('test');
+        //System.debug(contactsId);
+        /*
+        Opportunity opp = [SELECT id, Training__c FROM Opportunity WHERE id = :oppId LIMIT 1];
+        System.debug(opp);
+        List<Participant__c> participants = new List<Participant__c>();
+        for(String id : contactsId) {
+            Participant__c p = new Participant__c();
+            p.Contact_Name__c = id;
+            p.Opportunity_Name__c = opp.id;
+            p.Training__c = opp.Training__c;
+            participants.add(p);
+        }
+        System.debug(participants); */
+        // try {
+        //     insert participants;
+        // } catch(DMLException e) {
+        //     System.debug(e);
+        // }
+    }
+
 }

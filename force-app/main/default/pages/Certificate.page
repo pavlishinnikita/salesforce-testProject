@@ -126,7 +126,7 @@
     </head>
     <body>
         <apex:repeat value="{!Participants}" var="p">
-            <div class="certificate">
+            <div class="certificate page-break">
                 <header class="title">
                     <h1>Certificate</h1>
                 </header>
@@ -176,7 +176,7 @@
                     </div>
                 </footer>
             </div>
-            <div class="page-break"></div>
+            <!--div class="page-break"></div-->
         </apex:repeat>
     </body>
 </apex:page>
