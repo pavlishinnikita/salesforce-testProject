@@ -5,11 +5,15 @@
             	size: a4;
             }
             
+            .page-break:first-child {
+                page-break-before: avoid;
+            }
+
             .page-break {
-            	page-break-after: auto;
+            	page-break-before: always;
             }
                         
-        	body {
+        	body, html {
             	display: block;
             	font-family: Tahoma	sans-serif;	
                 width: 100%;
