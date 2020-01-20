@@ -12,7 +12,6 @@ soon you will take part in our seminar.  The course takes place on the following
  
 at the following location:  
 {!relatedTo.Training__r.Location__r.Billing_Street__c}, {!relatedTo.Training__r.Location__r.Postal_Code__c}, {!relatedTo.Training__r.Location__r.Billing_City__c}, {!relatedTo.Training__r.Location__r.Billing_Country__c}
-{Street},  {PLZ} {City},  {Country} 
  
 You may find more details about the location and how to get there on our website: {Company WebSite} 
  
