@@ -139,12 +139,12 @@
                         {!p.Contact_Name__r.FirstName & ' ' & p.Contact_Name__r.LastName}
                     </div>
                     <div class="info__sub">
-                        from
-                        <apex:outputText value="{0, date, MM'.'dd'.'yyyy}">
+                        at
+                        <apex:outputText value="{0, date, MM'.'dd'.'yyyy} from {0, date, HH:mm}">
                         	<apex:param value="{!p.Training__r.Start_Date__c}"/>
                         </apex:outputText>
-                        to
-                        <apex:outputText value="{0, date, MM'.'dd'.'yyyy}">
+
+                        <apex:outputText value=" to {0, date, HH:mm}">
                         	<apex:param value="{!p.Training__r.End_Date__c}"/>
                         </apex:outputText>
                     </div>

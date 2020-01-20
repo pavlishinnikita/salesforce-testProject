@@ -2,34 +2,18 @@
 
     <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
     <aura:attribute name="participants" type="Participant__c[]"/>
-    <aura:html tag="style">
-        .cuf-content {
-            padding: 0 0rem !important;
-        }
-        .slds-p-around--medium {
-            padding: 0rem !important;
-        }       
-        .slds-modal__content{
-            overflow-y:hidden !important;
-            height:unset !important;
-            max-height:unset !important;
-        }
-    </aura:html>
     <div class="modal-header slds-modal__header" >
         FILL GPA
     </div>
-    <div class="slds-modal__content slds-p-around--x-large slds-align_absolute-center slds-size_1-of-1 slds-is-relative" aura:id="modalbody" id="modalbody">
+    <div aura:id="modalbody" id="modalbody">
         <form class="slds-form--stacked">
             <aura:iteration items="{!v.participants}" var="item" >
                 <lightning:input type="decimal" aura:id="gpa" label="{!item.Contact_Name__r.FirstName + ' ' + item.Contact_Name__r.LastName}" value="{!item.GPA__c}"/>
             </aura:iteration>
-    	</form>
+        </form>
     </div>
-    <!-- MODAL FOOTER -->
-	<div class="modal-footer slds-modal__footer slds-size_1-of-1">
-		<div class="forceChangeRecordTypeFooter">
-			<lightning:button class="slds-button slds-button_neutral" label="Cancel" onclick="{!c.close}" />
-			<lightning:button variant="Brand" class="slds-button slds-button--brand" label="Submit" onclick="{!c.updateGpa}"/>
-		</div>
-	</div>
+    <center>
+        <lightning:button class="slds-button slds-button_neutral slds-m-top_medium" label="Cancel" onclick="{!c.close}" />
+        <lightning:button variant="Brand" class="slds-button slds-button--brand slds-m-top_medium" label="Submit" onclick="{!c.updateGpa}"/>
+    </center>
 </aura:component>

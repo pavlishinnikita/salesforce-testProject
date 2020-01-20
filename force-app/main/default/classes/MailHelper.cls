@@ -42,7 +42,16 @@ public class MailHelper {
         }
         Messaging.sendEmail(mails);
     } */
-    
+    public static Messaging.SingleEmailMessage clone(Messaging.SingleEmailMessage source) {
+        Messaging.SingleEmailMessage dest = new Messaging.SingleEmailMessage();
+        dest.saveAsActivity = source.saveAsActivity;
+        dest.setTemplateId(source.getTemplateId());
+        dest.setTargetObjectId(source.getTargetObjectId());
+        dest.setSenderDisplayName(source.getSenderDisplayName());
+        dest.setFileAttachments(source.getFileAttachments());
+        return dest;
+    }
+
     public static List<Messaging.SingleEmailMessage> sendParticipantsList(List<Training__c> trainings) {
         EmailTemplate et = [SELECT id FROM EmailTemplate WHERE developerName = 'Participant_List' LIMIT 1];
         List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
@@ -65,16 +74,18 @@ public class MailHelper {
             } catch(VisualforceException e) {
                 // handle error
             }
-           /*
-            Messaging.SingleEmailMessage mailToPlace = (Messaging.SingleEmailMessage)JSON.deserialize(JSON.serialize(mail), Messaging.SingleEmailMessage.class);
+
+            Messaging.SingleEmailMessage mailToPlace = MailHelper.clone(mail);//(Messaging.SingleEmailMessage)JSON.deserialize(JSON.serialize(mail), Messaging.SingleEmailMessage.class);
+            mailToPlace.saveAsActivity = false;
             mailToPlace.setTargetObjectId(t.Location__c);
             mails.add(mailToPlace);
             
             if(t.Restaurant__c != null) {
-                Messaging.SingleEmailMessage mailToRestaurant = (Messaging.SingleEmailMessage)JSON.deserialize(JSON.serialize(mail), Messaging.SingleEmailMessage.class);
+                Messaging.SingleEmailMessage mailToRestaurant = MailHelper.clone(mail);//(Messaging.SingleEmailMessage)JSON.deserialize(JSON.serialize(mail), Messaging.SingleEmailMessage.class);
+                mailToRestaurant.saveAsActivity = false;
                 mailToRestaurant.setTargetObjectId(t.Restaurant__c);
                 mails.add(mailToRestaurant);
-            } */
+            }
             mails.add(mail);
         }
         return mails;

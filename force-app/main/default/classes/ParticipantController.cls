@@ -40,7 +40,7 @@ public class ParticipantController {
         List<Integer> returnValue = new List<Integer>();
         returnValue.add(Integer.valueOf(o.Training__r.Max_participants_quantity__c));
         returnValue.add(Integer.valueOf(o.Training__r.Participants__c));
-        return returnValue;//Integer.valueOf(o.Training__r.Max_participants_quantity__c);
+        return returnValue;
     }
 
     @AuraEnabled
