@@ -12,6 +12,7 @@
 				component.set('v.createdParticipants', maxAndCurr[1]);
 			} else {
 				// handle error
+				helper.showToast('Server answer', 'Internal error. Refresh page', 'fail');
 			}
 		});
 
