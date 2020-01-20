@@ -39,7 +39,11 @@
             	height: inherit;
             	width:inherit;
             }
-                       
+
+            .info {
+                margin-bottom: 10px;
+            }
+
             .info > div {
             	text-align: center;
             	margin: 0 0 20px 0;
@@ -59,16 +63,29 @@
             	font-size: 1.5em;
             }
             
+
             .topic {
             	display:block;
             	height: 300px;
             	width: 100%;
-            	margin: 0 0 10% 4%;
             	text-align: center;
             	font-size: 1.5em;
+
             }
+            .column {
+                float: left;
+                width: 50%;
+                padding: 10px;
+                height: inherit; 
+            }
+
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+            
             .topic__main {
-            	padding: 0 4% 0 4%;
             	display:inline-block;
             	vertical-align: top;
             }
@@ -76,7 +93,6 @@
             .topic__detail {
             	text-align: left;
             	height: inherit;
-            	padding: 0 0 0 4%;
             	display:inline-block;
             	border-left: 3px solid blue;
             	vertical-align: top;
@@ -85,7 +101,7 @@
             footer {
             	display:block;
 				margin: 10% 0 0 5%;
-				width: 90%;            
+				width: 100%;            
             }
             
             footer > img {
@@ -126,6 +142,27 @@
             	padding 0;
             	margin 0;
             }
+            
+
+            .bblock {
+                display: table-cell; 
+                text-align: center;
+                vertical-align: top;
+                margin-top: 10px;
+                height: 250px;
+                width: 100%;
+            }
+            
+            .wrap {
+                display: table;
+                width: 100%;
+                table-layout: fixed;
+            }
+
+            .line {
+                border-left: 3px solid blue;
+            }
+
         </style>
     </head>
     <body>
@@ -159,14 +196,12 @@
                         GPA {!p.GPA__c}
                     </div>
                 </div>
-                <div class="topic">
-                    <div class="topic__main">
+                <div class="wrap">
+                    <div class="bblock">
                         Main Topics
                     </div>
-                    <div class="topic__detail">
-                        <div>
-                            {!p.Training__r.Training_Course__r.Description__c}
-                        </div>
+                    <div class="bblock line">
+                        {!p.Training__r.Training_Course__r.Description__c}
                     </div>
                 </div>
                 <footer>
@@ -180,7 +215,6 @@
                     </div>
                 </footer>
             </div>
-            <!--div class="page-break"></div-->
         </apex:repeat>
     </body>
 </apex:page>
