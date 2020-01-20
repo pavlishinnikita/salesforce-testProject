@@ -53,8 +53,7 @@
 			contactsId.push(items.find('contactId').get('v.value'));
 		}
 
-		// let action = component.get("c.createParticipants");
-		let action = component.get("c.test");
+		let action = component.get("c.setParticipants");
 		console.log(contactsId);
 		console.log(component.get('v.recordId'));
 		action.setParams({

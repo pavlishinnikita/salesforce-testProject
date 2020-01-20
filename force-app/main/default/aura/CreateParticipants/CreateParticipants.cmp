@@ -9,6 +9,7 @@
         Participants {!v.createdQuantity} of {!v.participantsQuantity}
     </div>
     <lightning:layoutItem padding="around-small" size="12" aura:id="participantsContainer">
+        <!--c:CusomLookup /-->
     </lightning:layoutItem> 
     <center>
         <lightning:button class="slds-m-top_medium" label="Cancel" onclick="{!c.close}" />

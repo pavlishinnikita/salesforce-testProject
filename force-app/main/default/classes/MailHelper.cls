@@ -65,6 +65,16 @@ public class MailHelper {
             } catch(VisualforceException e) {
                 // handle error
             }
+           /*
+            Messaging.SingleEmailMessage mailToPlace = (Messaging.SingleEmailMessage)JSON.deserialize(JSON.serialize(mail), Messaging.SingleEmailMessage.class);
+            mailToPlace.setTargetObjectId(t.Location__c);
+            mails.add(mailToPlace);
+            
+            if(t.Restaurant__c != null) {
+                Messaging.SingleEmailMessage mailToRestaurant = (Messaging.SingleEmailMessage)JSON.deserialize(JSON.serialize(mail), Messaging.SingleEmailMessage.class);
+                mailToRestaurant.setTargetObjectId(t.Restaurant__c);
+                mails.add(mailToRestaurant);
+            } */
             mails.add(mail);
         }
         return mails;

@@ -44,7 +44,7 @@ public class ParticipantController {
     }
 
     @AuraEnabled
-    public static void test(String oppId, String[] contactsId) {
+    public static void setParticipants(String oppId, String[] contactsId) {
         Opportunity opp = [SELECT id, Training__c FROM Opportunity WHERE id = :oppId LIMIT 1];
         List<Participant__c> participants = new List<Participant__c>();
         for(String id : contactsId) {
@@ -59,29 +59,6 @@ public class ParticipantController {
         } catch(DMLException e) {
             System.debug(e);
         }
-    }
-
-    @AuraEnabled
-    public static void createParticipants(String oppId, String[] contactsId) {
-        System.debug('test');
-        //System.debug(contactsId);
-        /*
-        Opportunity opp = [SELECT id, Training__c FROM Opportunity WHERE id = :oppId LIMIT 1];
-        System.debug(opp);
-        List<Participant__c> participants = new List<Participant__c>();
-        for(String id : contactsId) {
-            Participant__c p = new Participant__c();
-            p.Contact_Name__c = id;
-            p.Opportunity_Name__c = opp.id;
-            p.Training__c = opp.Training__c;
-            participants.add(p);
-        }
-        System.debug(participants); */
-        // try {
-        //     insert participants;
-        // } catch(DMLException e) {
-        //     System.debug(e);
-        // }
     }
 
 }
