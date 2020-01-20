@@ -49,19 +49,18 @@ public class CertificateController {
         List<Participant__c> participants;
 
         // get signature
-        List<Training__c> t = [SELECT Trainer__c, Trainer__r.FirstName, Trainer__r.LastName FROM Training__c WHERE id = :trainingId];         
+        List<Training__c> t = [SELECT Trainer__c, Trainer__r.FirstName, Trainer__r.LastName FROM Training__c WHERE id = :trainingId];       
         if(!t.isEmpty()) {
-            
+
             ContentWorkspace ws = [SELECT Id, RootContentFolderId FROM ContentWorkspace WHERE Name = 'Signatures' LIMIT 1];
-            
-            String filename = t.get(0).Trainer__r.FirstName + '_' + t.get(0).Trainer__r.LastName;
-            ContentDocumentLink cdLink = [SELECT id, ContentDocument.LatestPublishedVersionID
-                                             FROM ContentDocumentLink
-                                             WHERE linkedEntityId = :ws.Id AND ContentDocument.Title = :filename];
-            
-        	trainerSignature = cdLink.ContentDocument.LatestPublishedVersionID;
-			
-        } 
+                String filename = t.get(0).Trainer__r.FirstName + '_' + t.get(0).Trainer__r.LastName;
+                List<ContentDocumentLink> cdLink = [SELECT id, ContentDocument.LatestPublishedVersionID
+                                                FROM ContentDocumentLink
+                                                WHERE linkedEntityId = :ws.Id AND ContentDocument.Title = :filename LIMIT 1];
+                if(!cdLink.isEmpty()) {
+                    trainerSignature = cdLink.get(0).ContentDocument.LatestPublishedVersionID;                                                    
+                }
+        }
         // get signature
         
         if(participantId == null) {

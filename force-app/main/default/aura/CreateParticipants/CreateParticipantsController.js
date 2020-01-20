@@ -21,7 +21,7 @@
 		$A.get("e.force:closeQuickAction").fire(); 
 	},
 	addItem: function(component, event, helper) {
-		if(component.get('v.createdQuantity') !== component.get('v.participantsQuantity')) {
+		if(component.get('v.createdParticipants') !== component.get('v.participantsQuantity')) {
 			$A.createComponent(
 				"c:ContactField",
 				{
@@ -37,7 +37,7 @@
 					}
 				}
 			);
-			component.set('v.createdQuantity', component.get('v.createdQuantity') + 1);
+			component.set('v.createdParticipants', component.get('v.createdParticipants') + 1);
 		}
 	},
 	createParticipants: function(component, event, helper) {
