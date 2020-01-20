@@ -16,8 +16,10 @@ trigger FillTrainingPrice on Training__c (before insert, before update) {
 
     for(Training__c training : Trigger.New) {
         PriceBookEntry pbs = currentPBSmap.get(training.Product__c);
-        if(pbs.UnitPrice != null) { // if product not set for training
-        	training.List_Price__c = pbs.UnitPrice;   
+        if(pbs != null) {
+            if(pbs.UnitPrice != null) { // if product not set for training
+        	    training.List_Price__c = pbs.UnitPrice;   
+            }
         }
     }
 }
