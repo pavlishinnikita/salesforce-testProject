@@ -1,12 +1,11 @@
 <aura:component controller="ParticipantController" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
     <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
     <aura:attribute name="participantsQuantity" type="Integer" />
-    <aura:attribute name="createdQuantity" type="Integer" />
-    <aura:attribute name="isButtonDisabled" type="boolean" default="false" />
+    <aura:attribute name="createdParticipants" type="Integer" />
     <aura:attribute name="items" type="Participant__c[]" />
     <div>
         <lightning:buttonIcon variant="bare" iconName="utility:new"  alternativeText="Settings" onclick="{!c.addItem}" disabled="{!v.participantsQuantity == v.createdQuantity}"  />
-        Participants {!v.createdQuantity} of {!v.participantsQuantity}
+        Participants {!v.createdParticipants} of {!v.participantsQuantity}
     </div>
     <lightning:layoutItem padding="around-small" size="12" aura:id="participantsContainer">
         <!--c:CusomLookup /-->

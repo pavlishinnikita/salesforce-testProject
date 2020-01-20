@@ -9,7 +9,7 @@
 			if(res.getState() == 'SUCCESS') {
 				let maxAndCurr = res.getReturnValue();
 				component.set('v.participantsQuantity', maxAndCurr[0]);
-				component.set('v.createdQuantity', maxAndCurr[1]);
+				component.set('v.createdParticipants', maxAndCurr[1]);
 			} else {
 				// handle error
 			}
@@ -33,7 +33,6 @@
 					if(container.isValid()) {
 						let body = container.get('v.body');
 						body.push(comp);
-						//component.set('v.body', body);
 						container.set('v.body', body);
 					}
 				}
