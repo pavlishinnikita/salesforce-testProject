@@ -12,12 +12,13 @@ public with sharing class FillGPATaskBatch implements Database.Batchable<sObject
 		if(!trainings.isEmpty()) {
 			for(Training__c training :trainings) {
 				Task t = new Task();
-				t.Subject = 'Fill GPA';
-				t.Status = 'Open';
-				t.Priority = 'Normal';
-				t.WhatId = training.Trainer__c;
-				t.OwnerId = t.OwnerId;
-				tasks.add(t);
+                t.Subject = 'Fill GPA';
+                t.Status = 'Open';
+                t.Priority = 'Normal';
+                t.WhoId = training.Trainer__c;
+				t.OwnerId = training.Trainer__r.OwnerId;
+                t.ActivityDate = Date.today() + 2;
+                tasks.add(t); 
 			}
 		}
 	}
