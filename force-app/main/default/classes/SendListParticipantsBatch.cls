@@ -11,6 +11,6 @@ public class SendListParticipantsBatch implements Database.Batchable<sObject> {
     }
 
     public void finish(Database.BatchableContext bc) {
-        // Messaging.sendEmail(mails);
+        Messaging.sendEmail(mails);
     }
 }

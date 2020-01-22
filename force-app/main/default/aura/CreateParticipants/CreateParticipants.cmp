@@ -1,17 +1,49 @@
-<aura:component controller="ParticipantController" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
+<aura:component controller="ParticipantController"
+    implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
     <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
     <aura:attribute name="participantsQuantity" type="Integer" />
     <aura:attribute name="createdParticipants" type="Integer" />
+    <aura:attribute name="renderField" type="Boolean" />
     <aura:attribute name="items" type="Participant__c[]" />
-    <div>
-        <lightning:buttonIcon variant="bare" iconName="utility:new"  alternativeText="Settings" onclick="{!c.addItem}" disabled="{!v.participantsQuantity == v.createdQuantity}"  />
+    <aura:html tag="style">
+        
+        .cuf-content {
+            padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+            padding: 0rem !important;
+        }
+        .slds-modal__content {
+            height:unset !important;
+            max-height:unset !important;
+        }
+    </aura:html>
+
+    <div class="modal-header slds-modal__header slds-size_1-of-1">
         Participants {!v.createdParticipants} of {!v.participantsQuantity}
     </div>
-    <lightning:layoutItem padding="around-small" size="12" aura:id="participantsContainer">
-        <!--c:CusomLookup /-->
-    </lightning:layoutItem> 
-    <center>
-        <lightning:button class="slds-m-top_medium" label="Cancel" onclick="{!c.close}" />
-        <lightning:button variant="Brand" class="slds-m-top_medium" label="Submit" onclick="{!c.createParticipants}"/>
-    </center>
+    <!-- MODAL BODY / INPUT FORM -->
+    <div class="slds-modal__content slds-p-around--x-small slds-align_absolute-center slds-size_1-of-1 slds-is-relative"
+        aura:id="modalbody" id="modalbody">
+        <lightning:layout multipleRows="true">
+            <lightning:layoutItem padding="around-small" size="12" aura:id="participantsContainer">
+                <aura:renderIf isTrue="{!v.renderField}" >
+                    <c:ContactField aura:id="participant" />
+                <aura:set attribute="else">
+                    <div>Max participant quantity has been reached</div>
+                </aura:set>
+                </aura:renderIf>
+            </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small" size="12">
+                <div class="add-item-btn" onclick="{!c.addItem}" disabled="{!v.participantsQuantity == v.createdQuantity}">Add item</div>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div> <!-- End of Modal Content -->
+    <!-- MODAL FOOTER -->
+    <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+        <div class="forceChangeRecordTypeFooter">
+            <lightning:button class="slds-m-top_medium" label="Cancel" onclick="{!c.close}" />
+            <lightning:button variant="Brand" class="slds-m-top_medium" label="Submit" onclick="{!c.createParticipants}" />
+        </div>
+    </div>       
 </aura:component>

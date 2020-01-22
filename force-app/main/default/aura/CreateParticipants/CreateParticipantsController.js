@@ -9,10 +9,10 @@
 			if(res.getState() == 'SUCCESS') {
 				let maxAndCurr = res.getReturnValue();
 				component.set('v.participantsQuantity', maxAndCurr[0]);
-				component.set('v.createdParticipants', maxAndCurr[1]);
+				component.set('v.createdParticipants', maxAndCurr[1] + 1); // 1 is standart one field
+				component.set('v.renderField', !(maxAndCurr[0] == maxAndCurr[1]) );
 			} else {
-				// handle error
-				helper.showToast('Server answer', 'Internal error. Refresh page', 'fail');
+				helper.showToast('Server answer', res.getError()[0].getMessage(), 'fail'); // get errors from server here
 			}
 		});
 
@@ -27,7 +27,6 @@
 				"c:ContactField",
 				{
 					'aura:id': 'participant',
-					'required': 'false'
 				},
 				(comp) => {
 					let container = component.find("participantsContainer");
@@ -66,6 +65,7 @@
 			if(res.getState() == 'SUCCESS') {
 				helper.showToast('Particippants created', 'Operation success', 'success');
 				$A.get("e.force:closeQuickAction").fire();
+				$A.get('e.force:refreshView').fire();
 			} else {
 				console.log(res.getError());
 				helper.showToast('Particippants created', 'Operation fail', 'fail');

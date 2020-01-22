@@ -68,20 +68,19 @@ public class MailHelper {
 				Messaging.EmailFileAttachment attachment = new Messaging.EmailFileAttachment();
                 attachment.setFileName('participants.pdf');
             	attachment.setContentType('application/pdf');
-				//attachment.setFileName('participant list');
 				attachment.setBody(pr.getContent());
                 mail.setFileAttachments(new Messaging.EmailFileAttachment[]{attachment});
             } catch(VisualforceException e) {
                 // handle error
             }
 
-            Messaging.SingleEmailMessage mailToPlace = MailHelper.clone(mail);//(Messaging.SingleEmailMessage)JSON.deserialize(JSON.serialize(mail), Messaging.SingleEmailMessage.class);
+            Messaging.SingleEmailMessage mailToPlace = mail;
             mailToPlace.saveAsActivity = false;
             mailToPlace.setTargetObjectId(t.Location__c);
             mails.add(mailToPlace);
             
             if(t.Restaurant__c != null) {
-                Messaging.SingleEmailMessage mailToRestaurant = MailHelper.clone(mail);//(Messaging.SingleEmailMessage)JSON.deserialize(JSON.serialize(mail), Messaging.SingleEmailMessage.class);
+                Messaging.SingleEmailMessage mailToRestaurant = mail;
                 mailToRestaurant.saveAsActivity = false;
                 mailToRestaurant.setTargetObjectId(t.Restaurant__c);
                 mails.add(mailToRestaurant);

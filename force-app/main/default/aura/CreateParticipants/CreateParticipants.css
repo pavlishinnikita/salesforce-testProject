@@ -1,0 +1,20 @@
+.THIS .attach-to-bottom {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 100%;
+}
+
+.THIS .add-item-btn {
+    cursor: pointer;
+    text-align: right;
+    color: blue;
+    text-decoration: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none; 
+}
+
+.THIS .add-item-btn:hover {
+    text-decoration: underline;
+}

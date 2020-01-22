@@ -36,7 +36,7 @@ public class ParticipantController {
 
     @AuraEnabled
     public static Integer[] getParticipantsCount(String oppId) {
-        Opportunity o = [SELECT Training__r.Max_participants_quantity__c, Training__r.Participants__c FROM Opportunity WHERE id = :oppId];
+        Opportunity o = [SELECT Training__r.Max_participants_quantity__c, Training__r.Participants__c FROM Opportunity WHERE id = :oppId LIMIT 1];
         List<Integer> returnValue = new List<Integer>();
         returnValue.add(Integer.valueOf(o.Training__r.Max_participants_quantity__c));
         returnValue.add(Integer.valueOf(o.Training__r.Participants__c));
@@ -47,11 +47,14 @@ public class ParticipantController {
     public static void setParticipants(String oppId, String[] contactsId) {
         Opportunity opp = [SELECT id, Training__c FROM Opportunity WHERE id = :oppId LIMIT 1];
         List<Participant__c> participants = new List<Participant__c>();
+        List<String> pickListValuesList= new List<String>();
+
         for(String id : contactsId) {
             Participant__c p = new Participant__c();
             p.Contact_Name__c = id;
             p.Opportunity_Name__c = opp.id;
             p.Training__c = opp.Training__c;
+            p.Status__c = 'Registered';
             participants.add(p);
         }
         try {
