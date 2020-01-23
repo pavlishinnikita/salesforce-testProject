@@ -1,0 +1,5 @@
+<aura:component controller="SurveyController"  implements="forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="trainingId" type="String" />
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
+    <div>MEGA TEST {!v.trainingId}</div>
+</aura:component>

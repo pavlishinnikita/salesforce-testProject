@@ -1,0 +1,10 @@
+<apex:page >
+    <apex:includeLightning />
+    <div id="surveyContainer"></div>
+    <script>
+		$Lightning.use('c:SurveyApp', () => {
+            $Lightning.createComponent('c:SurveyForm', {}, 'surveyContainer', (cmp, status) => {
+        	});
+        });
+    </script>
+</apex:page>

@@ -4,6 +4,16 @@
     <deleteConstraint>SetNull</deleteConstraint>
     <externalId>false</externalId>
     <label>Contact Name</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>Trainer cannot be add to training as participant</errorMessage>
+        <filterItems>
+            <field>Contact.RecordType.DeveloperName</field>
+            <operation>equals</operation>
+            <value>Participants</value>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
     <referenceTo>Contact</referenceTo>
     <relationshipLabel>Participants</relationshipLabel>
     <relationshipName>Participants</relationshipName>
