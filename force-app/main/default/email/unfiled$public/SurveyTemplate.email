@@ -1,0 +1,16 @@
+<messaging:emailTemplate subject="Please, fill survey" recipientType="Contact" relatedToType="Participant__c">
+<messaging:plainTextEmailBody >
+Dear {!relatedTo.Contact_Name__r.FirstName}, 
+ 
+Thank you for taking part in Training {!relatedTo.Training__r.Training_Course__r.Name} 
+We are interested in hearing about your impressions. Please take a few minutes to provide us with feedback to help shape future interactions with our Team. Your feedback is an important part of our continuous efforts to improve the way we support customers.  
+Best Regards  from your team of {CompanyName}
+
+{!relatedTo.Survey_URL__c}
+
+ph: {CompanyPhone}  
+fax:  {CompanyFax} 
+Email: {CompanyEmail} 
+Site: {CompanySite}
+</messaging:plainTextEmailBody>
+</messaging:emailTemplate>

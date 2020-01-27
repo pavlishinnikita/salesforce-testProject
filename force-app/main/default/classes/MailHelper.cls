@@ -1,92 +1,81 @@
 public class MailHelper {
-    public static void sendInvites(List<Participant__c> participants) {
-        EmailTemplate et = [SELECT id FROM EmailTemplate WHERE developerName = 'Invite_to_training' LIMIT 1];
-        List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
-        List<Id> contacts = new List<Id>();
-        List<Id> participantIds = new List<Id>();
-        for(Participant__c p : participants) {
-            Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-        	mail.saveAsActivity = true;
-        	mail.setTemplateId(et.id);
-        	mail.setTargetObjectId(p.Contact_Name__c);
-        	mail.setWhatId(p.id);
-        	mail.setSenderDisplayName('Trainer');
-            mails.add(mail);
-        }
-        Messaging.sendEmail(mails);
-    }
-    /*
-    public static void sendParticipantsList(List<Training__c> trainings) {
-        EmailTemplate et = [SELECT id FROM EmailTemplate WHERE developerName = 'Participant_List' LIMIT 1];
-        List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
-        for(Training__c t : trainings) {
-        	Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-        	mail.saveAsActivity = true;
-           	mail.setTemplateId(et.id);
-        	mail.setTargetObjectId(t.Trainer__c);
-           	//mail.setWhatId(t.id);
-            mail.setSenderDisplayName('Training event');
-            PageReference pr = Page.ParticipantsList;
-            pr.getParameters().put('trainingId', t.id);
-            try {
-				Messaging.EmailFileAttachment attachment = new Messaging.EmailFileAttachment();
-                attachment.setFileName('participants.pdf');
-            	attachment.setContentType('application/pdf');
-				//attachment.setFileName('participant list');
-				attachment.setBody(pr.getContent());
-                mail.setFileAttachments(new Messaging.EmailFileAttachment[]{attachment});
-            } catch(VisualforceException e) {
-                // handle error
-            }
-            mails.add(mail);
-        }
-        Messaging.sendEmail(mails);
-    } */
-    public static Messaging.SingleEmailMessage clone(Messaging.SingleEmailMessage source) {
-        Messaging.SingleEmailMessage dest = new Messaging.SingleEmailMessage();
-        dest.saveAsActivity = source.saveAsActivity;
-        dest.setTemplateId(source.getTemplateId());
-        dest.setTargetObjectId(source.getTargetObjectId());
-        dest.setSenderDisplayName(source.getSenderDisplayName());
-        dest.setFileAttachments(source.getFileAttachments());
-        return dest;
-    }
+	public static void sendInvites(List<Participant__c> participants) {
+		EmailTemplate et = [SELECT id FROM EmailTemplate WHERE developerName = 'Invite_to_training' LIMIT 1];
+		List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
+		List<Id> contacts = new List<Id>();
+		List<Id> participantIds = new List<Id>();
+		for(Participant__c p :participants) {
+			Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+			mail.saveAsActivity = true;
+			mail.setTemplateId(et.id);
+			mail.setTargetObjectId(p.Contact_Name__c);
+			mail.setWhatId(p.id);
+			mail.setSenderDisplayName('Trainer');
+			mails.add(mail);
+		}
+		Messaging.sendEmail(mails);
+	}
 
-    public static List<Messaging.SingleEmailMessage> sendParticipantsList(List<Training__c> trainings) {
-        EmailTemplate et = [SELECT id FROM EmailTemplate WHERE developerName = 'Participant_List' LIMIT 1];
-        List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
-        for(Training__c t : trainings) {
-        	Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-        	mail.saveAsActivity = true;
-           	mail.setTemplateId(et.id);
-        	mail.setTargetObjectId(t.Trainer__c);
-           	//mail.setWhatId(t.id);
-            mail.setSenderDisplayName('Training event');
-            PageReference pr = Page.ParticipantsList;
-            pr.getParameters().put('trainingId', t.id);
-            try {
+	public static List<Messaging.SingleEmailMessage> sendParticipantsList(List<Training__c> trainings) {
+		EmailTemplate et = [SELECT id FROM EmailTemplate WHERE developerName = 'Participant_List' LIMIT 1];
+		List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
+		for(Training__c t :trainings) {
+			Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+			mail.saveAsActivity = true;
+			mail.setTemplateId(et.id);
+			mail.setTargetObjectId(t.Trainer__c);
+			//mail.setWhatId(t.id);
+			mail.setSenderDisplayName('Training event');
+			PageReference pr = Page.ParticipantsList;
+			pr.getParameters().put('trainingId', t.id);
+			try {
 				Messaging.EmailFileAttachment attachment = new Messaging.EmailFileAttachment();
-                attachment.setFileName('participants.pdf');
-            	attachment.setContentType('application/pdf');
+				attachment.setFileName('participants.pdf');
+				attachment.setContentType('application/pdf');
 				attachment.setBody(pr.getContent());
-                mail.setFileAttachments(new Messaging.EmailFileAttachment[]{attachment});
-            } catch(VisualforceException e) {
-                // handle error
-            }
+				mail.setFileAttachments(new Messaging.EmailFileAttachment [] { 
+									    attachment});
+			} catch(VisualforceException e) {
+				// handle error
+			}
 
-            Messaging.SingleEmailMessage mailToPlace = mail;
-            mailToPlace.saveAsActivity = false;
-            mailToPlace.setTargetObjectId(t.Location__c);
-            mails.add(mailToPlace);
-            
-            if(t.Restaurant__c != null) {
-                Messaging.SingleEmailMessage mailToRestaurant = mail;
-                mailToRestaurant.saveAsActivity = false;
-                mailToRestaurant.setTargetObjectId(t.Restaurant__c);
-                mails.add(mailToRestaurant);
-            }
-            mails.add(mail);
-        }
+			Messaging.SingleEmailMessage mailToPlace = mail;
+			mailToPlace.saveAsActivity = false;
+			mailToPlace.setToAddresses(new List<String>{t.Location__r.Email__c});
+			mails.add(mailToPlace);
+
+			if(t.Restaurant__c != null) {
+				Messaging.SingleEmailMessage mailToRestaurant = mail;
+				mailToRestaurant.saveAsActivity = false;
+				mailToRestaurant.setToAddresses(new List<String>{t.Restaurant__r.Email__c});
+				mails.add(mailToRestaurant);
+			}
+			mails.add(mail);
+		}
+		return mails;
+	}
+
+	public static List<Messaging.SingleEmailMessage> sendSurveyInvites(List<Participant__c> participants) {
+		EmailTemplate et = [SELECT id, Body, HtmlValue FROM EmailTemplate WHERE developerName = 'SurveyTemplate' LIMIT 1];
+		List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
+        List<Site> site = [SELECT id, Subdomain, GuestUserId, UrlPathPrefix FROM Site WHERE Name = 'Survey'];
+		SiteDetail sd = [SELECT SecureURL FROM SiteDetail where DurableId = :site.get(0).id LIMIT 1];
+
+        String url = sd.SecureURL;
+		for(Participant__c p :participants) {
+			Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+
+			String plainBody = et.Body;
+            String fullUrl = url + '?trainingId=%27' + p.Training__c + '%27&participantId=%27' + p.id + '%27';
+			p.Survey_URL__c = fullUrl;
+			mail.setTemplateId(et.id);
+			mail.setTargetObjectId(p.Contact_Name__c);
+			mail.setWhatId(p.id);
+			mail.setSenderDisplayName('Survey');
+			mails.add(mail);
+			System.debug('AFTER');
+			System.debug(et.Body);
+		}
         return mails;
-    }
+	}
 }

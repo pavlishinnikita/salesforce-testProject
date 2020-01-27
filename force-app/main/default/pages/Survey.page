@@ -1,15 +1,16 @@
-<apex:page >
+<apex:page showHeader="false" sideBar="false">
     <apex:includeLightning />
     <div id="surveyContainer"></div>
     <script>
 		$Lightning.use('c:SurveyApp', () => {
-            $Lightning.createComponent('c:SurveyForm', 
-            {
-                'trainingId' : new String({!$CurrentPage.parameters.trainingId}).valueOf(),
-                'participantId': new String({!$CurrentPage.parameters.participantId}).valueOf(),
-                // 'newSurvey': {'sobjectType' : 'Participant__c'}
-            }, 
-            'surveyContainer', (cmp, status) => {
+            $Lightning.createComponent(
+                'c:SurveyForm', 
+                {
+                    'trainingId' : new String({!$CurrentPage.parameters.trainingId}).valueOf(),
+                    'participantId': new String({!$CurrentPage.parameters.participantId}).valueOf(),
+                }, 
+                'surveyContainer', 
+                (cmp, status) => {
         	});
         });
     </script>

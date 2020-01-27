@@ -117,6 +117,7 @@
 	<types>
 		<members>unfiled$public/Invite_to_training</members>
 		<members>unfiled$public/Participant_List</members>
+		<members>unfiled$public/SurveyTemplate</members>
 		<name>EmailTemplate</name>
 	</types>
 	<types>

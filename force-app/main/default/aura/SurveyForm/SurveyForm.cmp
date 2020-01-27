@@ -1,7 +1,63 @@
-<aura:component controller="SurveyController"  implements="forceCommunity:availableForAllPageTypes, lightning:isUrlAddressable" access="global">
+<aura:component controller="SurveyController" implements="lightning:isUrlAddressable,force:appHostable" access="global">
     <aura:attribute name="trainingId" type="String" default="" />
     <aura:attribute name="participantId" type="String" default="" />
-    <!-- <aura:attribute name="newSurvey" type="Survey__c" default="{'sobjectType' : 'Survey__c'}" /> -->
+    <aura:attribute name="newSurvey" type="Survey__c" default="{'sobjectType' : 'Survey__c'}" />
+    <aura:attribute name="isDisabledForm" type="Boolean" default="true" />
+    <aura:attribute name="showAlert" type="Boolean" default="false" />
+    <aura:attribute name="alertMessage" type="String" />
     <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
-    <div>MEGA TEST {!v.trainingId}</div>
+    <center class="title slds-m-bottom_medium slds-m-top_medium">
+        Welcome to the survey page about training
+    </center>
+    <div class="wrap">
+        <form class="slds-form--stacked">
+            <div class="slds-form-element slds-m-bottom_medium">
+                <aura:renderIf isTrue="{!v.showAlert}" >
+                    <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+                        <span class="slds-icon_container slds-icon-utility-info slds-m-right_x-small"
+                            title="Description of icon when needed">
+                        </span>
+                        <h2 aura:id="messageText" >{!v.alertMessage}</h2>
+                    </div>
+                </aura:renderIf>
+            </div>
+            <div class="slds-form-element">
+                <lightning:textarea disabled="{!v.isDisabledForm}" label="Feedback"
+                    placeholder="type your feedback here..." value="{!v.newSurvey.Feedback__c}" />
+            </div>
+            <div class="slds-form-element">
+                <!-- <force:inputField value="{!v.newSurvey.Impressions_Rate__c}" /> -->
+                <lightning:select disabled="{!v.isDisabledForm}" name="ImpressionsRate" label="Impressions rate?"
+                    value="{!v.newSurvey.Impressions_Rate__c}" required="false">
+                    <aura:iteration items="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" var="item">
+                        <option value="{!item}">{!item}</option>
+                    </aura:iteration>
+                </lightning:select>
+            </div>
+            <div class="slds-form-element">
+                <!-- <lightning:inputField label="Actuality rate?" value="{!v.newSurvey.Actuality_Rate__c}" /> -->
+                <lightning:select disabled="{!v.isDisabledForm}" name="ActualityRate" label="Actuality rate?"
+                    value="{!v.newSurvey.Actuality_Rate__c}" required="false">
+                    <aura:iteration items="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" var="item">
+                        <option value="{!item}">{!item}</option>
+                    </aura:iteration>
+                </lightning:select>
+            </div>
+
+            <div class="slds-form-element">
+                <lightning:select disabled="{!v.isDisabledForm}" name="FurtherParticipationRate"
+                    label="Further participation rate?" value="{!v.newSurvey.Further_Participation_Rate__c}"
+                    required="false">
+                    <aura:iteration items="[1, 2, 3, 4, 5]" var="item">
+                        <option value="{!item}">{!item}</option>
+                    </aura:iteration>
+                </lightning:select>
+            </div>
+
+            <div class="footer">
+                <lightning:button variant="Brand" class="slds-button slds-button--brand slds-m-top_medium"
+                    label="Submit" onclick="{!c.save}" disabled="{!v.isDisabledForm}" />
+            </div>
+        </form>
+    </div>
 </aura:component>
