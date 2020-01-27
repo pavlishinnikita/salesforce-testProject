@@ -27,9 +27,7 @@
             'survey' : survey
         });
         action.setCallback(this, (res) => {
-            if(res.getState() == 'SUCCESS') {
-                helper.showToast('ASDASDASDS', 'dasd', 'info');
-            } else {
+            if(res.getState() != 'SUCCESS') {
                 component.set('v.alertMessage', res.getError()[0].message);
                 component.set('v.showAlert', true);
             }
