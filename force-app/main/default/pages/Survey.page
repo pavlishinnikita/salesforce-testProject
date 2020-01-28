@@ -1,4 +1,4 @@
-<apex:page showHeader="false" sideBar="false">
+<apex:page showHeader="false" sideBar="false" title="Welcome to Survey Page!">
     <apex:includeLightning />
     <div id="surveyContainer"></div>
     <script>

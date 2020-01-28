@@ -38,6 +38,12 @@ public class CertificateController {
             cv.VersionData = body;
             cv.FirstPublishLocationId = p.Contact_Name__c;
             cvs.add(cv);
+            ContentVersion cvP = new ContentVersion();
+            cvP.Title = 'Cerifcate_' + p.Contact_Name__r.FirstName + '_' + p.Contact_Name__r.LastName;
+            cvP.PathOnClient = 'Certificate_' + p.Contact_Name__r.FirstName + '_' + p.Contact_Name__r.LastName + '.pdf';
+            cvP.VersionData = body;
+            cvP.FirstPublishLocationId = p.id;
+            cvs.add(cvP);
         }
         upsert cvs;
         return 'Success';

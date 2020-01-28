@@ -30,6 +30,8 @@
             if(res.getState() != 'SUCCESS') {
                 component.set('v.alertMessage', res.getError()[0].message);
                 component.set('v.showAlert', true);
+            } else {
+                component.set('v.showCongratulations', true);
             }
         });
         $A.enqueueAction(action);

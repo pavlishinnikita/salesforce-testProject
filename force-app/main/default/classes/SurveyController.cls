@@ -7,7 +7,7 @@ public with sharing class SurveyController {
         }
         List<Survey__c> sl = [SELECT id FROM Survey__c WHERE Training__c = :trainingId AND Participant__c = :participantId LIMIT 1];
         if(sl == null || !sl.isEmpty()) {
-            throw new ExternalObjectException('Your already has been a survey');
+            throw new ExternalObjectException('You have already completed the survey');
         }
         return 'SUCCESS';
     }

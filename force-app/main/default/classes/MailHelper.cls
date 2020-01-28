@@ -56,25 +56,15 @@ public class MailHelper {
 	}
 
 	public static List<Messaging.SingleEmailMessage> sendSurveyInvites(List<Participant__c> participants) {
-		EmailTemplate et = [SELECT id, Body, HtmlValue FROM EmailTemplate WHERE developerName = 'SurveyTemplate' LIMIT 1];
+		EmailTemplate et = [SELECT Id, Name, Subject, Body, HtmlValue FROM EmailTemplate WHERE developerName = 'SurveyTemplate' LIMIT 1];
 		List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
-        List<Site> site = [SELECT id, Subdomain, GuestUserId, UrlPathPrefix FROM Site WHERE Name = 'Survey'];
-		SiteDetail sd = [SELECT SecureURL FROM SiteDetail where DurableId = :site.get(0).id LIMIT 1];
-
-        String url = sd.SecureURL;
 		for(Participant__c p :participants) {
 			Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-
-			String plainBody = et.Body;
-            String fullUrl = url + '?trainingId=%27' + p.Training__c + '%27&participantId=%27' + p.id + '%27';
-			p.Survey_URL__c = fullUrl;
 			mail.setTemplateId(et.id);
 			mail.setTargetObjectId(p.Contact_Name__c);
 			mail.setWhatId(p.id);
 			mail.setSenderDisplayName('Survey');
 			mails.add(mail);
-			System.debug('AFTER');
-			System.debug(et.Body);
 		}
         return mails;
 	}

@@ -10,7 +10,7 @@
             if(res.getState() == "SUCCESS") {
         		helper.showToast('PDF', 'Generation was successful', 'success');
             } else {
-				helper.showToast('PDF', 'Oops! Generate error', 'error');
+				helper.showToast('PDF', res.getError()[0].message, 'error');
             }
     		component.set("v.generated", true);
         });

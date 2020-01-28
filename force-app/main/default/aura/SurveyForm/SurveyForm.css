@@ -2,3 +2,32 @@
     margin: auto;
     width: 50%;
 }
+
+.THIS .congratulation {
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    align-content: center; 
+    justify-content: center; 
+    font-weight: 900;
+    font-size: xx-large;
+    text-align: center;
+    overflow: auto;
+}
+
+.THIS .congratulation .text {
+    width: 100%;
+    height: 20%;
+}
+
+.THIS .welcome {
+    font-weight: 900;
+    font-size: x-large;
+    text-align: center;
+}
+
+.THIS .button-right {
+    float: right;
+}
