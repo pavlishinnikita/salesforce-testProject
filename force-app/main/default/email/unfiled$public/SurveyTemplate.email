@@ -1,15 +1,21 @@
 <messaging:emailTemplate subject="Please, fill survey" recipientType="Contact" relatedToType="Participant__c">
 <messaging:HtmlEmailBody >
 Dear {!relatedTo.Contact_Name__r.FirstName}, 
- 
+<br /> 
 Thank you for taking part in Training {!relatedTo.Training__r.Training_Course__r.Name} 
-We are interested in hearing about your impressions. Please take a few minutes to provide us with feedback to help shape future interactions with our Team. Your feedback is an important part of our continuous efforts to improve the way we support customers.  
+<br />
+We are interested in hearing about your impressions. Please take a few minutes to provide us with feedback to help shape future interactions with our Team. Your feedback is an important part of our continuous efforts to improve the way we support customers.
+<br /> 
 Best Regards  from your team of {!$Organization.Name}
-
+<br />
 SURVEY URL: <a href = "{!relatedTo.Survey_URL__c + '?trainingId=%27' + relatedTo.Training__c + '%27&participantId=%27' + relatedTo.id + '%27'}" > Survey LINK </a>
+<br />
 ph: {!$Organization.Phone}  
+<br />
 fax:  {!$Organization.Fax}
+<br />
 Email: admin@cloudwharf.com
+<br />
 Site: <a href="https://cloudwharf.com">cloudwharf.com</a>
 </messaging:HtmlEmailBody>
 </messaging:emailTemplate>

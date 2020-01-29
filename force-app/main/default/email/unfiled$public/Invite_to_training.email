@@ -1,23 +1,24 @@
 <messaging:emailTemplate subject="Welcome to training" recipientType="Contact" relatedToType="Participant__c">
-<messaging:plainTextEmailBody >
+<messaging:HtmlEmailBody >
 Hello {!relatedTo.Contact_Name__r.FirstName},
-  
-soon you will take part in our seminar.  The course takes place on the following dates and times: 
+<br />  
+soon you will take part in our seminar.  The course takes place on the following dates and times:
+<br /> 
 <apex:outputText value="{0,date,yyyy.MM.dd G 'at' HH:mm:ss z}">
     From: <apex:param value="{!relatedTo.Training__r.Start_Date__c}" />
 </apex:outputText> 
 <apex:outputText value="{0,date,yyyy.MM.dd G 'at' HH:mm:ss z}">
     Until: <apex:param value="{!relatedTo.Training__r.End_Date__c}" />
 </apex:outputText> 
- 
-at the following location:  
+<br /> 
+at the following location: 
 {!relatedTo.Training__r.Location__r.Billing_Street__c}, {!relatedTo.Training__r.Location__r.Postal_Code__c}, {!relatedTo.Training__r.Location__r.Billing_City__c}, {!relatedTo.Training__r.Location__r.Billing_Country__c}
- 
-You may find more details about the location and how to get there on our website: {Company WebSite} 
-  
+<br />  
+You may find more details about the location and how to get there on our website: <a href='http://cloudwharf.com'>Cloudwharf</a> 
+<br />   
  
 We are very much looking forward to meeting you. 
  
  
-</messaging:plainTextEmailBody>
+</messaging:HtmlEmailBody>
 </messaging:emailTemplate>

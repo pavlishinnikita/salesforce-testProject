@@ -1,4 +1,4 @@
-public class SendListParticipantsSchedule implements Schedulable {
+public with sharing class SendListParticipantsSchedule implements Schedulable {
     public static void execute(System.SchedulableContext ctx) {
         Date d = System.today() + 5;
         List<Training__c> trainings = [SELECT id, Start_Date__c, End_Date__c, Trainer__c, Location__r.Email__c, Restaurant__r.Email__c
