@@ -1,4 +1,4 @@
-public class ParticipantController {
+public with sharing class ParticipantController {
     public List < Participant__c > getParticipants() {
         String trainingId = ApexPages.currentPage().getParameters().get('trainingId');
         List < Participant__c > participants;
@@ -55,6 +55,7 @@ public class ParticipantController {
             p.Opportunity_Name__c = opp.id;
             p.Training__c = opp.Training__c;
             p.Status__c = 'Registered';
+            p.Registration_Date_Time__c = Datetime.now();
             participants.add(p);
         }
         try {

@@ -9,7 +9,11 @@
 			if(res.getState() == 'SUCCESS') {
 				let maxAndCurr = res.getReturnValue();
 				component.set('v.participantsQuantity', maxAndCurr[0]);
-				component.set('v.createdParticipants', maxAndCurr[1] + 1); // 1 is standart one field
+				if(maxAndCurr[0] == maxAndCurr[1]) {
+					component.set('v.createdParticipants', maxAndCurr[1]);
+				} else {
+					component.set('v.createdParticipants', maxAndCurr[1] + 1); // 1 is standart one field
+				}
 				component.set('v.renderField', !(maxAndCurr[0] == maxAndCurr[1]) );
 			} else {
 				helper.showToast('Server answer', res.getError()[0].getMessage(), 'fail'); // get errors from server here
@@ -22,7 +26,7 @@
 		$A.get("e.force:closeQuickAction").fire(); 
 	},
 	addItem: function(component, event, helper) {
-		if(component.get('v.createdParticipants') !== component.get('v.participantsQuantity')) {
+		if(component.get('v.createdParticipants') < component.get('v.participantsQuantity')) {
 			$A.createComponent(
 				"c:ContactField",
 				{
