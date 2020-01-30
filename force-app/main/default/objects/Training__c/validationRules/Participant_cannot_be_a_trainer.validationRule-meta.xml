@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Participant_cannot_be_a_trainer</fullName>
+    <active>true</active>
+    <description>Participant cannot be a trainer</description>
+    <errorConditionFormula>Trainer__r.RecordType.DeveloperName = &#39;Participants&#39;</errorConditionFormula>
+    <errorMessage>Participant cannot be a trainer</errorMessage>
+</ValidationRule>

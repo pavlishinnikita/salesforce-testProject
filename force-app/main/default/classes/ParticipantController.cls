@@ -37,6 +37,9 @@ public with sharing class ParticipantController {
     @AuraEnabled
     public static Integer[] getParticipantsCount(String oppId) {
         Opportunity o = [SELECT Training__r.Max_participants_quantity__c, Training__r.Participants__c FROM Opportunity WHERE id = :oppId LIMIT 1];
+        if(o.Training__c == null) {
+            throw new AuraHandledException('The opportunity doesn\'t have a training');
+        }
         List<Integer> returnValue = new List<Integer>();
         returnValue.add(Integer.valueOf(o.Training__r.Max_participants_quantity__c));
         returnValue.add(Integer.valueOf(o.Training__r.Participants__c));

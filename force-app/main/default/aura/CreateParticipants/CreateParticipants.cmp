@@ -1,8 +1,8 @@
 <aura:component controller="ParticipantController"
     implements="force:lightningQuickActionWithoutHeader,force:hasRecordId">
     <aura:handler name="init" action="{!c.doInit}" value="{!this}" />
-    <aura:attribute name="participantsQuantity" type="Integer" />
-    <aura:attribute name="createdParticipants" type="Integer" />
+    <aura:attribute name="participantsQuantity" type="Integer" default="0"  />
+    <aura:attribute name="createdParticipants" type="Integer" default="0" />
     <aura:attribute name="renderField" type="Boolean" />
     <aura:attribute name="items" type="Participant__c[]" />
     <aura:html tag="style">

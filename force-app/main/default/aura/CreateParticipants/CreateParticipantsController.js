@@ -16,7 +16,7 @@
 				}
 				component.set('v.renderField', !(maxAndCurr[0] == maxAndCurr[1]) );
 			} else {
-				helper.showToast('Server answer', res.getError()[0].getMessage(), 'fail'); // get errors from server here
+				helper.showToast('Server answer', res.getError()[0].message, 'fail'); // get errors from server here
 			}
 		});
 
