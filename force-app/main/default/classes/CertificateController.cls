@@ -114,6 +114,9 @@ public class CertificateController {
     @AuraEnabled
     public static String setGpa(Participant__c[] participants) {
         if(participants != null) {
+            for(Participant__c p : participants) {
+                p.Status__c = 'Participated';
+            }
 			update participants;
             return 'Successfuly';
         }
