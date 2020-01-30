@@ -1,7 +1,8 @@
 <messaging:emailTemplate subject="Welcome to training" recipientType="Contact" relatedToType="Participant__c">
 <messaging:HtmlEmailBody >
 Hello {!relatedTo.Contact_Name__r.FirstName},
-<br />  
+<br />
+<br />
 soon you will take part in our seminar.  The course takes place on the following dates and times:
 <br /> 
 <apex:outputText value="{0,date,yyyy.MM.dd G 'at' HH:mm:ss z}">
@@ -13,10 +14,10 @@ soon you will take part in our seminar.  The course takes place on the following
 <br /> 
 at the following location: 
 {!relatedTo.Training__r.Location__r.Billing_Street__c}, {!relatedTo.Training__r.Location__r.Postal_Code__c}, {!relatedTo.Training__r.Location__r.Billing_City__c}, {!relatedTo.Training__r.Location__r.Billing_Country__c}
-<br />  
+<br />
+<br /> 
 You may find more details about the location and how to get there on our website: <a href='http://cloudwharf.com'>Cloudwharf</a> 
-<br />   
- 
+<br />
 We are very much looking forward to meeting you. 
  
  

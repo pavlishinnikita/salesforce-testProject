@@ -40,13 +40,13 @@ public class MailHelper {
 			}
 
 			Messaging.SingleEmailMessage mailToPlace = mail;
-			mailToPlace.saveAsActivity = false;
+			mailToPlace.saveAsActivity = true;
 			mailToPlace.setToAddresses(new List<String>{t.Location__r.Email__c});
 			mails.add(mailToPlace);
 
 			if(t.Restaurant__c != null) {
 				Messaging.SingleEmailMessage mailToRestaurant = mail;
-				mailToRestaurant.saveAsActivity = false;
+				mailToRestaurant.saveAsActivity = true;
 				mailToRestaurant.setToAddresses(new List<String>{t.Restaurant__r.Email__c});
 				mails.add(mailToRestaurant);
 			}
