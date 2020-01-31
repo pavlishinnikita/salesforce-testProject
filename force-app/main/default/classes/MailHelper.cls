@@ -68,4 +68,30 @@ public class MailHelper {
 		}
         return mails;
 	}
+
+	public static List<Messaging.SingleEmailMessage> sendCertificates(List<Participant__c> participants) {
+		EmailTemplate et = [SELECT Id, Name, Subject, Body, HtmlValue FROM EmailTemplate WHERE developerName = 'Participant_certificate' LIMIT 1];
+		List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
+		for(Participant__c p : participants) {
+			Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+			mail.saveAsActivity = true;
+			mail.setTemplateId(et.id);
+			mail.setTargetObjectId(p.Contact_Name__c);
+			mail.setSenderDisplayName('Certificate');
+			////////////////////////
+			PageReference pr = Page.Certificate;
+            pr.getParameters().put('participantId',  p.id);
+            try {
+				Messaging.EmailFileAttachment attachment = new Messaging.EmailFileAttachment();
+				attachment.setFileName('certificate.pdf');
+				attachment.setContentType('application/pdf');
+				attachment.setBody(pr.getContent());
+				mail.setFileAttachments(new Messaging.EmailFileAttachment [] {attachment});
+            } catch(VisualforceException e) {
+                // handle error or send message to admin
+            }
+			mails.add(mail);
+		}
+		return mails;
+	}
 }
