@@ -71,8 +71,7 @@
 				$A.get("e.force:closeQuickAction").fire();
 				$A.get('e.force:refreshView').fire();
 			} else {
-				console.log(res.getError());
-				helper.showToast('Particippants created', 'Operation fail', 'fail');
+				helper.showToast('Particippants created', res.getError()[0].pageErrors[0].message, 'error');
 			}
 		});
 		$A.enqueueAction(action);

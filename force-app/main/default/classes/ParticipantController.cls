@@ -61,11 +61,7 @@ public with sharing class ParticipantController {
             p.Registration_Date_Time__c = Datetime.now();
             participants.add(p);
         }
-        try {
-            insert participants;
-        } catch(DMLException e) {
-            System.debug(e);
-        }
+        insert participants;
     }
 
 }
