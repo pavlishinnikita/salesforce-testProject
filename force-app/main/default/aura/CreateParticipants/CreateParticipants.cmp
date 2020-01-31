@@ -9,7 +9,7 @@
         .modal-body {
             position: relative;
         }
-        .modal-footer {
+        .footer {
             position:absolute;
             bottom: 0;
             left:0;
@@ -46,7 +46,7 @@
         </lightning:layout>
     </div> <!-- End of Modal Content -->
     <!-- MODAL FOOTER -->
-    <div class="modal-footer _slds-modal__footer slds-size_1-of-1 slds-modal__footer_directional">
+    <div class="footer modal-footer _slds-modal__footer slds-size_1-of-1 slds-modal__footer_directional">
         <div class="forceChangeRecordTypeFooter">
             <lightning:button class="button-left slds-m-top_medium" label="Cancel" onclick="{!c.close}" />
             <lightning:button variant="Brand" class="button-right slds-m-top_medium" label="Submit" onclick="{!c.createParticipants}" />
