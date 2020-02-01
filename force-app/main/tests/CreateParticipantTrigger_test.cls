@@ -43,7 +43,7 @@ public with sharing class CreateParticipantTrigger_test {
         SiteDetail sd = [SELECT SecureURL FROM SiteDetail where DurableId = :site.get(0).id LIMIT 1];
         String url = sd.SecureURL;
         Participant__c p = [SELECT id, Survey_URL__c FROM Participant__c LIMIT 1];
-        System.assertEquals(p.Survey_URL__c, url, 'Survey URL wrong');
+        System.assertEquals(url, p.Survey_URL__c, 'Survey URL wrong');
         Test.stopTest();
         
     }

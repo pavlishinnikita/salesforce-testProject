@@ -51,24 +51,24 @@ public with sharing class SurveyController_test {
     static void doTestGetInit(){
         Participant__c p = [SELECT id, Training__c FROM Participant__c LIMIT 1];
         Test.startTest();
-        System.assertEquals(SurveyController.getInit(p.id, p.Training__c), 'SUCCESS', 'ERROR OF CONTROLLER INIT');
+        System.assertEquals('SUCCESS', SurveyController.getInit(p.id, p.Training__c), 'ERROR OF CONTROLLER INIT');
 
         try {
-            System.assertEquals(SurveyController.getInit(p.Training__c,''), 'INCORRECT SURVEY URL', 'MISSING participant id');
+            System.assertEquals('INCORRECT SURVEY URL', SurveyController.getInit(p.Training__c,''), 'MISSING participant id');
         } catch (ExternalObjectException e) {
-            System.assertEquals(e.getMessage(), 'INCORRECT SURVEY URL', 'MISSING participant id');
+            System.assertEquals('INCORRECT SURVEY URL', e.getMessage(), 'MISSING participant id');
         }
         
         try {
-            System.assertEquals(SurveyController.getInit('', p.id), 'INCORRECT SURVEY URL', 'MISSING training id');
+            System.assertEquals('INCORRECT SURVEY URL', SurveyController.getInit('', p.id), 'MISSING training id');
         } catch (ExternalObjectException e) {
-            System.assertEquals(e.getMessage(), 'INCORRECT SURVEY URL', 'MISSING training id');
+            System.assertEquals('INCORRECT SURVEY URL', e.getMessage(), 'MISSING training id');
         }
 
         try {
-            System.assertEquals(SurveyController.getInit(p.Training__c, p.id), 'You have already completed the survey', 'Survey apready create');
+            System.assertEquals('You have already completed the survey', SurveyController.getInit(p.Training__c, p.id), 'Survey apready create');
         } catch (ExternalObjectException e) {
-            System.assertEquals(e.getMessage(), 'You have already completed the survey', 'MISSING training id');
+            System.assertEquals('You have already completed the survey', e.getMessage(), 'MISSING training id');
         }
         Test.stopTest();
     }
@@ -84,14 +84,14 @@ public with sharing class SurveyController_test {
         try {
             SurveyController.setSurvey(s);
         } catch (Exception e) {
-            System.assertEquals(e.getMessage(), 'Cannot save survey. Incorrect data', 'No survey creation error');
+            System.assertEquals('Cannot save survey. Incorrect data', e.getMessage(), 'No survey creation error');
         }
         
         s.Training__c = ps.get(0).Training__c;
         s.Participant__c = ps.get(0).id;
         SurveyController.setSurvey(s);
         List<Survey__c> ls = [SELECT id FROM Survey__c];
-        System.assertNotEquals(ls.size(), 1, 'Survey not created');
+        System.assertNotEquals(1, ls.size(), 'Survey not created');
         
         Test.stopTest();
         

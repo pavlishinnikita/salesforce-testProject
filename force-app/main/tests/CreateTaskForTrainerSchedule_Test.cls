@@ -37,7 +37,7 @@ public with sharing class CreateTaskForTrainerSchedule_Test {
         Test.stopTest();
 
         List<Task> t = [SELECT id, Subject, Status, Priority, WhoId, OwnerId FROM Task];
-        System.assertEquals(t.isEmpty(), false, 'Task not created');
+        System.assertEquals(false, t.isEmpty(), 'Task not created');
         
     }
 }
