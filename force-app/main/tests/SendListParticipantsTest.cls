@@ -29,7 +29,7 @@ public class SendListParticipantsTest {
 		Account a = new Account(name = 'Account1', billingcity = 'New York', billingcountry = 'USA');
 		insert a;
 
-		Contact c = new Contact(firstname = 'first', lastname = 'last', accountId = a.id);
+		Contact c = new Contact(firstname = 'first', lastname = 'last', accountId = a.id, Email = 'contact@test.org');
 		insert c;
 
 		List<Participant__c> ps = new List<Participant__c>();
@@ -41,7 +41,6 @@ public class SendListParticipantsTest {
 			ps.add(p);
 		}
 		insert ps;
-        
 	}
 
 	@IsTest
@@ -58,6 +57,6 @@ public class SendListParticipantsTest {
 								    TotalJobItems, CreatedBy.Email
 								    FROM AsyncApexJob
 								    WHERE Id = :batchId];
-        System.assertEquals(0, job.NumberOfErrors);
+        System.assertEquals(0, job.NumberOfErrors, 'BATCH FAIL');
 	}
 }
