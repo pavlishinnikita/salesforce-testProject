@@ -33,7 +33,7 @@ public with sharing class CreateTaskForTrainerSchedule_Test {
         Date d = System.today();
 		List<Training__c> trainings = [SELECT id, Trainer__c, Start_Date__c, End_Date__c, Trainer__r.OwnerId FROM Training__c];
         TaskFortrainerSchedule sh1 = new TaskFortrainerSchedule();
-        system.schedule('Test Territory Check', CRON_EXP, sh1); 
+        system.schedule('Test add task', CRON_EXP, sh1); 
         Test.stopTest();
 
         List<Task> t = [SELECT id, Subject, Status, Priority, WhoId, OwnerId FROM Task];
