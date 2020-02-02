@@ -1,12 +1,9 @@
-public class CertificateController {
+public with sharing class CertificateController {
     
     private boolean isSignatureReceived;
     private String trainingId;
     private String trainerSignature;
-    
-    public CertificateController () {
-    }
-	
+    	
     public boolean getIsSignaturePresent() {
         return !(trainerSignature == '' || trainerSignature == null);
     }
