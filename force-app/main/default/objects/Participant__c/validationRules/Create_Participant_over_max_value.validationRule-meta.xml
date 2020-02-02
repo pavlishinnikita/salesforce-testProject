@@ -2,6 +2,6 @@
 <ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Create_Participant_over_max_value</fullName>
     <active>true</active>
-    <errorConditionFormula>Training__r.Participants__c == Training__r.Max_participants_quantity__c</errorConditionFormula>
+    <errorConditionFormula>(Training__r.Participants__c == Training__r.Max_participants_quantity__c) &amp;&amp; ISNEW()</errorConditionFormula>
     <errorMessage>Sorry! Max participant quantity has been reached</errorMessage>
 </ValidationRule>

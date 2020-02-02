@@ -24,8 +24,9 @@
         action.setCallback(this, (res) => {
             if (res.getState() == 'SUCCESS') {
                 helper.showToast('GPA', 'GPA updated successfully!', 'success');
+                $A.get('e.force:refreshView').fire();
             } else {
-                helper.showToast('GPA', 'GPA not updated!', 'error');
+                helper.showToast('GPA', `GPA not updated: ${res.getError()[0].pageErrors[0].message}`, 'error');
             }
 			$A.get("e.force:closeQuickAction").fire();
         });
