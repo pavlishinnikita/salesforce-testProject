@@ -186,7 +186,6 @@
                         </apex:outputText>
                     </div>
                     <div class="info__training">
-                        Content-Marketing-Seminar
                         {!p.Training__r.Training_Course__r.Name}
                     </div>
                     <div class="info__sub">
