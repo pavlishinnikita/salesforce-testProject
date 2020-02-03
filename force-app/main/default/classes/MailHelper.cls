@@ -94,4 +94,52 @@ public class MailHelper {
 		}
 		return mails;
 	}
+
+	public static List<Messaging.SingleEmailMessage> sendCertificatesNew(Map<Id, Participant__c> participants) {
+		EmailTemplate et = [SELECT Id, Name, Subject, Body, HtmlValue FROM EmailTemplate WHERE developerName = 'Participant_certificate' LIMIT 1];
+		List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
+
+		List<ContentVersion> generatedCertificates = new List<ContentVersion>();
+		List<ContentVersion> certificates = [SELECT id, Title, PathOnClient, VersionData, FirstPublishLocationId FROM ContentVersion WHERE FirstPublishLocationId IN :participants.keySet()];
+		Map<Id, ContentVersion> existCertificatesMap = new Map<Id, ContentVersion>(); 
+		
+		for(ContentVersion cv : certificates) {
+			existCertificatesMap.put(cv.FirstPublishLocationId, cv);
+		}
+
+		for(Participant__c p : participants.values()) {
+			Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+			mail.saveAsActivity = true;
+			mail.setTemplateId(et.id);
+			mail.setTargetObjectId(p.Contact_Name__c);
+			mail.setSenderDisplayName('Certificate');
+
+			Messaging.EmailFileAttachment attachment = new Messaging.EmailFileAttachment();
+			attachment.setFileName('certificate.pdf');
+			attachment.setContentType('application/pdf');
+
+			ContentVersion cv = existCertificatesMap.get(p.id);
+			
+			if(cv != null) {
+				attachment.setBody(cv.VersionData);
+			} else {
+				PageReference pr = Page.Certificate;
+				pr.getParameters().put('participantId',  p.id);
+				Blob body = pr.getContent();
+				attachment.setBody(body);
+				ContentVersion newCv = new ContentVersion();
+				newCv.Title = 'Cerifcate_' + p.Contact_Name__r.FirstName + '_' + p.Contact_Name__r.LastName;
+				newCv.PathOnClient = 'Certificate_' + p.Contact_Name__r.FirstName + '_' + p.Contact_Name__r.LastName + '.pdf';
+				newCv.VersionData = body;
+				newCv.FirstPublishLocationId = p.id;
+				generatedCertificates.add(newCv);
+			}
+			mail.setFileAttachments(new Messaging.EmailFileAttachment [] {attachment});
+			mails.add(mail);
+		}
+		if(!generatedCertificates.isEmpty()) {
+			insert generatedCertificates;
+		}
+		return mails;
+	}
 }
