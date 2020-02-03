@@ -6,13 +6,11 @@ public with sharing class SendCertificatesBatch implements Database.Batchable<sO
     }
 
     public List<Participant__c> start(Database.BatchableContext bc) {
-        System.debug(this.participants);
         return this.participants;
     }
 
     public void execute(Database.BatchableContext bc, List<Participant__c> ps) {
         List<Messaging.SingleEmailMessage> mails = MailHelper.sendCertificates(ps);
-        System.debug(ps);
         Messaging.sendEmail(mails);
     }
 
