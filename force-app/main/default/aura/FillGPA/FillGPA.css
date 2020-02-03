@@ -11,3 +11,12 @@
 	height:unset !important;
 	max-height:unset !important;
 } */
+
+.THIS .button-right {
+	float: right;
+	margin: 0 10px 0 0;
+}
+
+.THIS footer {
+	margin: 10px 0 0 0 ;
+}
